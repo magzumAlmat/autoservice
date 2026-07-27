@@ -1,0 +1,20 @@
+# robots.txt — CARX SERVICE
+# ВАЖНО: замените carx-service.kz на ваш реальный домен (и здесь, и в sitemap.xml).
+
+User-agent: *
+Allow: /
+Disallow: /.claude/
+
+# Яндекс понимает те же директивы; отдельная секция — на случай особых правил.
+User-agent: Yandex
+Allow: /
+Disallow: /.claude/
+
+# Мусорные боты, которые только жгут трафик хостинга
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+Sitemap: https://carx-service.kz/sitemap.xml
