@@ -13,7 +13,7 @@
   <g transform="translate(400 268)" opacity=".85">
     <path d="M0 -46 L34 -28 L34 2 C34 18 18 30 0 35 C-18 30 -34 18 -34 2 L-34 -28 Z"
           fill="none" stroke="#ff5c00" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M-17 16 L0 -18 L17 16 M-9 4 H9"
+    <path d="M-13 -13 L13 13 M13 -13 L-13 13"
           fill="none" stroke="#ff5c00" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
   <text x="400" y="378" text-anchor="middle" fill="#939ba8"
