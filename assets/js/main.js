@@ -718,18 +718,23 @@ function toast(message, isError = false) {
     const btn = $('#submitBtn');
     btn.classList.add('is-loading');
 
-    // ── ЗДЕСЬ подключается реальная отправка (fetch на ваш backend / CRM / Telegram-бот).
-    //    Сейчас это демонстрационная заглушка: данные никуда не уходят.
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.info('[CARX SERVICE] заявка (демо, не отправлена):', data);
-
-    setTimeout(() => {
-      btn.classList.remove('is-loading');
-      form.reset();
-      $$('.field').forEach((f) => f.classList.remove('has-error'));
-      $$('[data-err], [data-err-agree]').forEach((s) => { s.textContent = ''; });
-      toast('Заявка принята. Перезвоним в течение 15 минут!');
-    }, 900);
+    // Отправка на send.php, который лежит рядом с index.html.
+    fetch('send.php', { method: 'POST', body: new FormData(form) })
+      .then((r) => r.json().catch(() => {
+        // Пришёл не JSON — почти всегда это HTML-страница с ошибкой PHP или 404.
+        throw new Error('Сервер вернул неожиданный ответ');
+      }))
+      .then((res) => {
+        if (!res.ok) throw new Error(res.error || 'Не удалось отправить заявку');
+        form.reset();
+        $$('.field').forEach((f) => f.classList.remove('has-error'));
+        $$('[data-err], [data-err-agree]').forEach((s) => { s.textContent = ''; });
+        toast('Заявка принята. Перезвоним в течение 15 минут!');
+      })
+      .catch((err) => {
+        toast(err.message + '. Позвоните нам: +7 (776) 219-34-02', true);
+      })
+      .finally(() => btn.classList.remove('is-loading'));
   });
 
   // Минимальная дата записи — сегодня.

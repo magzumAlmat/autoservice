@@ -354,14 +354,25 @@ body.has-pointer .cursor-glow { opacity: 1; }
 
 .mobile-menu {
   position: fixed; inset: 0; z-index: 790;
-  display: flex; flex-direction: column; justify-content: center; gap: 28px;
-  padding: calc(var(--header-h) + 20px) clamp(20px, 7vw, 48px) 40px;
+  display: flex; flex-direction: column; gap: 28px;
+  /* Не center: при переполнении flex выталкивает содержимое ВВЕРХ,
+     и первый пункт уезжает под шапку. Центрируем авто-отступами ниже —
+     они схлопываются в 0, когда места не хватает. */
+  justify-content: flex-start;
+  /* env(safe-area-inset-*) — вырез и «домашняя полоска» на iPhone.
+     Без inset меню начинается прямо под логотипом. */
+  padding:
+    calc(var(--header-h) + env(safe-area-inset-top, 0px) + 28px)
+    clamp(20px, 7vw, 48px)
+    calc(36px + env(safe-area-inset-bottom, 0px));
   background: var(--bg);
   opacity: 0; transition: opacity .35s var(--ease);
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .mobile-menu.is-open { opacity: 1; }
-.mobile-menu__nav { display: grid; gap: 4px; }
+.mobile-menu__nav { display: grid; gap: 4px; margin-top: auto; }
+.mobile-menu__foot { margin-bottom: auto; }
 .mobile-menu__nav a {
   font-size: clamp(24px, 7vw, 38px); font-weight: 800; letter-spacing: -.03em;
   padding: 6px 0; border-bottom: 1px solid var(--line);

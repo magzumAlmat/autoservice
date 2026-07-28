@@ -13,7 +13,7 @@ declare(strict_types=1);
 /* ═══════════════════ НАСТРОЙКИ ═══════════════════ */
 
 /** Куда приходят заявки. Можно несколько адресов через запятую. */
-const MAIL_TO = 'info@carx-service.kz','imarchik9@gmail.com';
+const MAIL_TO = 'info@carx-service.kz, imarchik9@gmail.com';
 
 /**
  * От какого адреса уходит письмо.
@@ -39,7 +39,11 @@ const SMTP_HOST   = 'smtp.yandex.ru';  // Google: smtp.gmail.com, Mail.ru: smtp.
 const SMTP_PORT   = 465;               // 465 — SSL, 587 — STARTTLS
 const SMTP_SECURE = 'ssl';             // 'ssl' для порта 465, 'tls' для 587
 const SMTP_USER   = 'noreply@carx-service.kz';
-const SMTP_PASS   = '87762193402imar95'; // НЕ обычный пароль от почты — см. README
+// Пароль намеренно пустой: при MAIL_MODE = 'mail' SMTP не используется вообще.
+// Если когда-нибудь переключитесь на 'smtp' — впишите сюда ПАРОЛЬ ПРИЛОЖЕНИЯ,
+// а не основной пароль от ящика: его можно отозвать одной кнопкой, и он не даёт
+// доступа к чтению почты.
+const SMTP_PASS   = '';
 
 /** Лимит заявок с одного IP в час — защита от спам-ботов. */
 const RATE_LIMIT = 15;
@@ -68,6 +72,33 @@ function reply(bool $ok, string $error = '', int $code = 200): void
 }
 
 /**
+ * Обрезка строки по символам, а не по байтам.
+ * Расширение mbstring есть не на каждом хостинге, а без него вызов mb_substr
+ * роняет скрипт с фатальной ошибкой. Поэтому — с запасным вариантом.
+ */
+function u_substr(string $s, int $start, int $len): string
+{
+    if (function_exists('mb_substr')) {
+        return mb_substr($s, $start, $len, 'UTF-8');
+    }
+    $chars = preg_split('//u', $s, -1, PREG_SPLIT_NO_EMPTY);
+    if ($chars === false) {
+        return substr($s, $start, $len);   // совсем крайний случай
+    }
+    return implode('', array_slice($chars, $start, $len));
+}
+
+/** Длина строки в символах, тоже без обязательного mbstring. */
+function u_strlen(string $s): int
+{
+    if (function_exists('mb_strlen')) {
+        return mb_strlen($s, 'UTF-8');
+    }
+    $chars = preg_split('//u', $s, -1, PREG_SPLIT_NO_EMPTY);
+    return $chars === false ? strlen($s) : count($chars);
+}
+
+/**
  * Убирает переводы строк из коротких полей.
  * Без этого через форму можно дописать свои заголовки в письмо
  * и рассылать спам от вашего имени (header injection).
@@ -76,14 +107,14 @@ function clean(string $v, int $max = 300): string
 {
     $v = str_replace(["\r", "\n", "\0", '%0a', '%0d'], ' ', $v);
     $v = trim((string)preg_replace('/\s+/u', ' ', $v));
-    return mb_substr($v, 0, $max);
+    return u_substr($v, 0, $max);
 }
 
 /** Многострочное поле: переносы строк оставляем, управляющие символы убираем. */
 function cleanMultiline(string $v, int $max = 2000): string
 {
     $v = str_replace(["\r\n", "\r", "\0"], ["\n", "\n", ''], $v);
-    return mb_substr(trim($v), 0, $max);
+    return u_substr(trim($v), 0, $max);
 }
 
 /** Кодирует тему письма по RFC 2047 — иначе кириллица станет кракозябрами. */
@@ -94,6 +125,23 @@ function encodeHeader(string $s): string
         return mb_encode_mimeheader($s, 'UTF-8', 'B', "\r\n");
     }
     return '=?UTF-8?B?' . base64_encode($s) . '?=';
+}
+
+
+/* ─────────── 0. Самодиагностика ───────────
+   Откройте https://carx-service.kz/send.php?selftest=1 — покажет, чего не хватает
+   на хостинге. Отдаёт только флаги возможностей: ни паролей, ни путей, ни заявок.
+   Когда всё заработает, этот блок можно удалить. */
+
+if (isset($_GET['selftest'])) {
+    echo json_encode([
+        'php'          => PHP_VERSION,
+        'mbstring'     => function_exists('mb_substr'),
+        'mail'         => function_exists('mail'),
+        'log_writable' => (bool)@is_writable(dirname(LOG_FILE)),
+        'mode'         => MAIL_MODE,
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
 
@@ -135,7 +183,7 @@ $agree   = isset($_POST['agree']);
 
 $digits = (string)preg_replace('/\D/', '', $phone);
 
-if (mb_strlen($name) < 2) reply(false, 'Укажите имя');
+if (u_strlen($name) < 2) reply(false, 'Укажите имя');
 if (strlen($digits) !== 11) reply(false, 'Проверьте номер телефона');
 if ($service === '') reply(false, 'Выберите услугу');
 if (!$agree) reply(false, 'Нужно согласие на обработку данных');

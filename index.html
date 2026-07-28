@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Google tag (gtag.js) — Google Ads AW-18353857986.
+     Стоит сразу после charset и viewport: кодировку браузер обязан увидеть
+     в первом килобайте документа, поэтому скрипт идёт следом, а не перед ней.
+     preconnect ниже открывает соединение с Google заранее — тег грузится быстрее. -->
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18353857986"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18353857986');
+</script>
 <!-- ===================================================================
      SEO. ВЕЗДЕ, ГДЕ ВСТРЕЧАЕТСЯ carx-service.kz, ПОДСТАВЬТЕ СВОЙ ДОМЕН
      (этот файл, robots.txt, sitemap.xml). Подробности — в README.md.
@@ -72,7 +86,7 @@
       href="https://images.unsplash.com/photo-1632405862117-236585cfb757?auto=format&fit=crop&w=1600&q=65">
 <!-- ?v=1 — метка версии. Увеличивайте число при каждом обновлении стилей
      или скрипта, иначе у постоянных посетителей останется старая версия из кэша. -->
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 
 <!-- Подстраховка для роботов и пользователей без JS: анимация появления
      основана на opacity, и без скрипта текст остался бы невидимым. -->
@@ -956,37 +970,37 @@
           <article class="review">
             <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
             <blockquote>Три сервиса не могли найти, почему уходит антифриз. Здесь опрессовали систему и нашли трещину в корпусе термостата за час. Сделали за день, взяли ровно столько, сколько назвали по телефону.</blockquote>
-            <footer><b>Асель К.</b><span>Toyota RAV4 · система охлаждения</span></footer>
+            <footer><b>Toyota RAV4</b><span>Система охлаждения</span></footer>
           </article>
 
           <article class="review">
             <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
-            <blockquote>Пригнал «пинающийся» вариатор, был готов к капиталке. Айбек сделал аппаратную замену масла и почистил гидроблок — поехала как новая. Честно сказали, что капремонт пока не нужен.</blockquote>
-            <footer><b>Дмитрий П.</b><span>Nissan Qashqai · CVT</span></footer>
+            <blockquote>Пригнал «пинающийся» вариатор, был готов к капиталке. Сделали аппаратную замену масла и почистили гидроблок — поехала как новая. Честно сказали, что капремонт пока не нужен.</blockquote>
+            <footer><b>Nissan Qashqai</b><span>Вариатор CVT</span></footer>
           </article>
 
           <article class="review">
             <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
-            <blockquote>Отдельное спасибо Мадине — единственный человек в Алматы, кто объяснил мне на пальцах, зачем нужна каждая позиция в смете. Ничего лишнего не навязали.</blockquote>
-            <footer><b>Гульнара Ж.</b><span>Hyundai Tucson · ТО-2</span></footer>
+            <blockquote>Отдельное спасибо мастеру-приёмщику: впервые мне на пальцах объяснили, зачем нужна каждая позиция в смете. Ничего лишнего не навязали.</blockquote>
+            <footer><b>Hyundai Tucson</b><span>Техобслуживание ТО-2</span></footer>
           </article>
 
           <article class="review">
             <div class="review__stars" aria-label="Оценка 4 из 5">★★★★☆</div>
             <blockquote>Ремонт ГБЦ сделали качественно, машина едет ровно. Единственное — ждал запчасть четыре дня вместо обещанных двух, но предупредили заранее и не тянули с ответом.</blockquote>
-            <footer><b>Ерлан Т.</b><span>Volkswagen Passat · двигатель</span></footer>
+            <footer><b>Volkswagen Passat</b><span>Ремонт двигателя</span></footer>
           </article>
 
           <article class="review">
             <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
-            <blockquote>Приехал с «чеком» и трясущимся холостым. Нұрлан за 40 минут показал осциллограмму — оказалась катушка. Поменяли одну, а не комплект, как советовали в другом месте.</blockquote>
-            <footer><b>Марат С.</b><span>Chevrolet Cruze · электрика</span></footer>
+            <blockquote>Приехал с «чеком» и трясущимся холостым. Диагност за 40 минут показал осциллограмму — оказалась катушка. Поменяли одну, а не комплект, как советовали в другом месте.</blockquote>
+            <footer><b>Chevrolet Cruze</b><span>Автоэлектрика</span></footer>
           </article>
 
           <article class="review">
             <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
             <blockquote>Делали кузов после парковочного контакта. Покрасили бампер и крыло — переход не видно даже на солнце. Плюс бесплатно отполировали соседнюю дверь.</blockquote>
-            <footer><b>Алия Н.</b><span>Kia K5 · кузов и покраска</span></footer>
+            <footer><b>Kia K5</b><span>Кузовной ремонт и покраска</span></footer>
           </article>
 
         </div>
@@ -1038,7 +1052,7 @@
       </details>
       <details class="acc" data-reveal data-delay="300">
         <summary><span>Работаете с корпоративными автопарками?</span><i></i></summary>
-        <div class="acc__body"><p>Да, обслуживаем 30+ компаний Алматы. Договор, отсрочка платежа, ежемесячный отчёт по каждому авто и приоритетная запись. Отдел по юрлицам: +7 (705) 457-88-86.</p></div>
+        <div class="acc__body"><p>Да, обслуживаем 30+ компаний Алматы. Договор, отсрочка платежа, ежемесячный отчёт по каждому авто и приоритетная запись. </p></div>
       </details>
     </div>
   </div>
@@ -1315,6 +1329,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="assets/js/main.js?v=2" defer></script>
+<script src="assets/js/main.js?v=3" defer></script>
 </body>
 </html>
