@@ -729,6 +729,13 @@ function toast(message, isError = false) {
         form.reset();
         $$('.field').forEach((f) => f.classList.remove('has-error'));
         $$('[data-err], [data-err-agree]').forEach((s) => { s.textContent = ''; });
+        // Конверсия Google Ads «Запрос цены». Срабатывает ТОЛЬКО здесь —
+        // после подтверждения от сервера, что заявка принята. Если поставить
+        // этот код в <head>, как в письме Google, конверсия засчитывалась бы
+        // каждому посетителю при открытии страницы.
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', { send_to: 'AW-18353857986/z6pZCJjb6NccEMLL5q9E' });
+        }
         toast('Заявка принята. Перезвоним в течение 15 минут!');
       })
       .catch((err) => {
@@ -755,7 +762,7 @@ $('#mapLoad')?.addEventListener('click', () => {
     `<iframe title="Карта проезда к CARX SERVICE — Алматы, ул. Хрищатого, 4"
        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
        src="https://maps.google.com/maps?q=${coords}&hl=ru&z=17&output=embed"></iframe>
-     <a class="map__2gis" href="https://go.2gis.com/yremx" target="_blank" rel="noopener">Открыть в 2ГИС</a>`;
+     <a class="map__2gis" href="https://go.2gis.com/qRdEK" target="_blank" rel="noopener">Открыть в 2ГИС</a>`;
 });
 
 /* ============ 13. ФОЛБЭК КАРТИНОК ============ */
@@ -770,6 +777,24 @@ $$('img').forEach((img) => {
     img.src = PLACEHOLDER;
   });
 });
+
+/* ============ 14. КОНВЕРСИИ: ЗВОНОК И WHATSAPP ============ */
+// Действие-конверсия «Контакт» в Google Ads. Ловит вторую половину обращений,
+// которую форма не видит: клик по номеру телефона и по кнопке WhatsApp.
+// Событие шлём один раз за посещение — человек может нажать номер в шапке,
+// потом в подвале, но обращение при этом одно.
+(function initContactConversions() {
+  const LABEL = 'AW-18353857986/2NitCLPptNgcEMLL5q9E';
+  let fired = false;
+
+  $$('a[href^="tel:"], a[href*="wa.me"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (fired || typeof gtag !== 'function') return;
+      fired = true;
+      gtag('event', 'conversion', { send_to: LABEL });
+    });
+  });
+})();
 
 // Закрытие мобильного меню по Escape.
 document.addEventListener('keydown', (e) => {

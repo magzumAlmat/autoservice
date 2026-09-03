@@ -13,4 +13,10 @@
       <image:title>Автосервис CARX SERVICE в Алматы</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://carx-service.kz/privacy.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>
