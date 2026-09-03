@@ -25,7 +25,7 @@
 <!-- Title: 55 знаков — влезает в выдачу целиком, главный запрос в начале -->
 <title>Автосервис в Алматы — CARX-service | СТО полного цикла</title>
 <!-- Description: ~160 знаков — Google показывает целиком, не обрезая -->
-<meta name="description" content="Автосервис в Алматы: диагностика от 8 000 ₸, ремонт двигателя, АКПП, ходовой, электрики и кузова. Смета до начала работ и фотоотчёт. Хрищатого 2, Калкаман-2.">
+<meta name="description" content="Автосервис в Алматы: диагностика от 8 000 ₸, выезд мастера на дом, ремонт двигателя, АКПП, ходовой, электрики и кузова. Смета до начала работ и фотоотчёт">
 
 <link rel="canonical" href="https://carx-service.kz/">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -209,6 +209,12 @@
       "@type": "FAQPage",
       "@id": "https://carx-service.kz/#faq",
       "mainEntity": [
+        { "@type": "Question",
+          "name": "Есть ли у вас выезд мастера?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да, у нас есть <a href=\"https://carx-service.kz/vyezd.html\">выездная диагностика и ремонт</a>. Мастер приедет к вам в течение часа." } },
+        { "@type": "Question",
+          "name": "Сколько стоит выездная диагностика?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Выездная диагностика стоит от 10 000 ₸. Подробнее на <a href=\"https://carx-service.kz/vyezd.html\">странице выездных услуг</a>." } },
         { "@type": "Question",
           "name": "Сколько стоит диагностика и вернут ли её при ремонте?",
           "acceptedAnswer": { "@type": "Answer", "text": "Компьютерная диагностика — 8 000 ₸, диагностика ходовой на подъёмнике — бесплатно. Если вы делаете ремонт у нас, стоимость диагностики вычитается из итоговой суммы работ." } },
@@ -1082,6 +1088,14 @@
 
     <div class="faq__list">
       <details class="acc" data-reveal open>
+        <summary><span>Есть ли у вас выезд мастера?</span><i></i></summary>
+        <div class="acc__body"><p>Да, у нас есть <a href="vyezd.html">выездная диагностика и мелкосрочный ремонт</a>. Мастер приедет к вам в течение часа.</p></div>
+      </details>
+      <details class="acc" data-reveal data-delay="60">
+        <summary><span>Сколько стоит выездная диагностика?</span><i></i></summary>
+        <div class="acc__body"><p>Выездная диагностика стоит от 10 000 ₸. Подробнее о ценах на <a href="vyezd.html">странице выездных услуг</a>.</p></div>
+      </details>
+      <details class="acc" data-reveal data-delay="120">
         <summary><span>Сколько стоит диагностика и вернут ли её при ремонте?</span><i></i></summary>
         <div class="acc__body"><p>Компьютерная диагностика — 8 000 ₸, диагностика ходовой на подъёмнике — бесплатно. Если вы делаете ремонт у нас, стоимость диагностики вычитается из итоговой суммы работ.</p></div>
       </details>
@@ -1282,6 +1296,8 @@
           мастер-приёмщик перезвонит за 15 минут и назовёт стоимость до приезда.
         </p>
         <ul class="geo__links">
+          <li><a href="vyezd.html">Выездная диагностика авто в Алматы</a></li>
+          <li><a href="vyezd.html">Выезд автоэлектрика на дом</a></li>
           <li><a href="#services" data-scroll>Компьютерная диагностика в Алматы</a></li>
           <li><a href="#services" data-scroll>Ремонт двигателя и замена ГРМ</a></li>
           <li><a href="#services" data-scroll>Ремонт АКПП и вариаторов CVT</a></li>
@@ -1321,6 +1337,7 @@
     <nav class="footer__col" aria-label="Услуги">
       <h4>Услуги</h4>
       <a href="#services" data-scroll>Диагностика</a>
+      <a href="vyezd.html">Выезд мастера</a>
       <a href="#services" data-scroll>Ремонт двигателя</a>
       <a href="#services" data-scroll>АКПП и вариаторы</a>
       <a href="#services" data-scroll>Ходовая часть</a>
