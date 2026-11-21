@@ -757,12 +757,12 @@ $('#mapLoad')?.addEventListener('click', () => {
   const map = $('#map');
   if (!map) return;
   // Координаты точки из карточки 2ГИС — точнее, чем поиск по строке адреса.
-  const coords = '43.199883,76.834588';
+  const coords = '43.200464,76.839849';
   map.innerHTML =
-    `<iframe title="Карта проезда к CARX SERVICE — Алматы, ул. Хрищатого, 4"
+    `<iframe title="Карта проезда к CARX SERVICE — Алматы, ул. Степная, 1б"
        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
        src="https://maps.google.com/maps?q=${coords}&hl=ru&z=17&output=embed"></iframe>
-     <a class="map__2gis" href="https://go.2gis.com/qRdEK" target="_blank" rel="noopener">Открыть в 2ГИС</a>`;
+     <a class="map__2gis" href="https://2gis.kz/almaty/geo/70030076210327089/76.839849,43.200464" target="_blank" rel="noopener">Открыть в 2ГИС</a>`;
 });
 
 /* ============ 13. ФОЛБЭК КАРТИНОК ============ */
