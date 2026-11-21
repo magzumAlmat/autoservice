@@ -1262,12 +1262,13 @@
         </li>
       </ul>
 
+      <!-- Карта встроена прямо в HTML: ул. Степная, 1б (43.200464, 76.839849).
+           Яндекс подписывает улицу правильно — Google показывает её как «ул. 7». -->
       <div class="map" id="map" data-reveal data-delay="120">
-        <button class="map__load" id="mapLoad" type="button">
-          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></svg>
-          <b>Показать карту</b>
-          <span>Загрузится только по клику — так страница открывается быстрее</span>
-        </button>
+        <iframe title="Карта проезда к CARX SERVICE — Алматы, ул. Степная, 1б"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://yandex.kz/map-widget/v1/?ll=76.839849%2C43.200464&z=17&pt=76.839849%2C43.200464%2Cpm2rdl"></iframe>
+        <a class="map__2gis" href="https://2gis.kz/almaty/geo/70030076210327089/76.839849,43.200464" target="_blank" rel="noopener">Открыть в 2ГИС</a>
       </div>
     </div>
 
