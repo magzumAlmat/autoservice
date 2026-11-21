@@ -756,12 +756,13 @@ function toast(message, isError = false) {
 $('#mapLoad')?.addEventListener('click', () => {
   const map = $('#map');
   if (!map) return;
-  // Координаты точки из карточки 2ГИС — точнее, чем поиск по строке адреса.
-  const coords = '43.200464,76.839849';
+  // Яндекс.Карты отображают «ул. Степная, 1б» корректно (в отличие от Google Maps, где улица подписана как «ул. 7»).
+  // Формат координат в Яндекс.Картах: долгота,широта.
+  const lonLat = '76.839849,43.200464';
   map.innerHTML =
     `<iframe title="Карта проезда к CARX SERVICE — Алматы, ул. Степная, 1б"
        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-       src="https://maps.google.com/maps?q=${coords}&hl=ru&z=17&output=embed"></iframe>
+       src="https://yandex.kz/map-widget/v1/?ll=${encodeURIComponent(lonLat)}&z=17&pt=${encodeURIComponent(lonLat)},pm2rdl"></iframe>
      <a class="map__2gis" href="https://2gis.kz/almaty/geo/70030076210327089/76.839849,43.200464" target="_blank" rel="noopener">Открыть в 2ГИС</a>`;
 });
 
